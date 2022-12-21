@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     get 'customers/:id', to: 'customers#update'
   end
   namespace :admin do
-    get 'genres', to: 'genres#index'
+    post 'genres', to: 'genres#index'
     get 'genres', to: 'genres#create'
     get 'genres/:id/edit', to: 'genres#edit'
     get 'genres/:id', to: 'genres#update'
@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     get 'items', to: 'items#index'
     get 'items/new'
     get 'items', to: 'items#create'
-    get 'items/:id', to: 'items#show'
+    post 'items/:id', to: 'items#show'
     get 'items/:id/edit', to: 'items#edit'
     get 'items/:id', to: 'items#update'
   end
