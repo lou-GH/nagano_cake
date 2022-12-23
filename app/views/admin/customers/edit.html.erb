@@ -34,8 +34,9 @@
 <%= f.text_field :email, autofocus: true, id:"inputEmail", placeholder: "sample@example.com" %>
 
 <p>会員ステータス</p>
-<label for="inputPostalCode"></label>
-<%= f.text_field :is_deleted, autofocus: true, id:"inputPostalCode", placeholder: "0000000" %>
+<label for="inputIsDeleted"></label>
+<%= f.radio_button :is_deleted, :ture, autofocus: true, id:"inputIsDleted" %>
+<%= f.radio_button :is_deleted, :false, autofocus: true, id:"inputIsDleted" %>
 
 <%= f.submit '変更を保存' %>
 
