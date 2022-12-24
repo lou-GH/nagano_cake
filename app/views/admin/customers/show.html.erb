@@ -1,2 +1,39 @@
-<h1>Admin::Customers#show</h1>
-<p>Find me in app/views/admin/customers/show.html.erb</p>
+<div class="container px-5 px-sm-0">
+
+  <h2><%= customer.last_name %>" "<%= customer.first_name %>さんの会員詳細</h2>
+
+    <p>会員ID</p>
+    <%= customer.id %>
+
+    <p>氏名</p>
+    <%= f.file_field :last_name, autofocus: true, id:"inputLastName",　placeholder: "令和" %>
+    <%= f.text_field :first_name, autofocus: true, id:"inputFirstName", placeholder:"道子" %>
+
+    <p>フリガナ</p>
+    <%= f.file_field :last_name_kana, autofocus: true, id:"inputLastNameKana",　placeholder: "レイワ" %>
+    <%= f.text_field :first_name_kana, autofocus: true, id:"inputFirstNameKana", placeholder: "ミチコ" %>
+
+    <p>郵便番号</p>
+    <%= f.text_field :postal_code, autofocus: true, id:"inputPostalCode", placeholder: "0000000" %>
+
+    <p>住所</p>
+    <%= f.text_field :address, autofocus: true, id:"inputAddress", placeholder: "東京都渋谷区代々木神園町0-0" %>
+
+    <p>電話番号</p>
+    <%= f.text_field :postal_code, autofocus: true, id:"inputPostalCode", placeholder: "0000000" %>
+
+    <p>メールアドレス</p>
+    <%= f.text_field :email, autofocus: true, id:"inputEmail", placeholder: "sample@example.com" %>
+
+    <p>会員ステータス</p>
+    <%= f.text_field :is_deleted, autofocus: true, id:"inputIsDleted" %>
+
+    <%= link_to admin_customers_(@customer)edit_path do %>
+      <%= f.submit '編集する' %>
+    <% end %>
+
+    <%= link_to admin_customers_path do %>
+      <%= f.submit '注文履歴一覧を見る' %>
+    <% end %>
+
+</div>
