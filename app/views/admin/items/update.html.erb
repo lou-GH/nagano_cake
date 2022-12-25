@@ -1,2 +1,59 @@
-<h1>Admin::Items#update</h1>
-<p>Find me in app/views/admin/items/update.html.erb</p>
+<div class="container px-5 px-sm-0">
+
+  <h2>注文履歴詳細</h2>
+
+  <p>購入者</p>
+  <%= customer.last_name %>" "<%= customer.first_name %>
+
+  <p>注文日</p>
+  <%= order.created_at %>
+
+  <p>配送先</p>
+  <%= f.text_field :postal_code, autofocus: true, id:"inputPostalCode", placeholder: "0000000" %>
+  <%= f.text_field :address, autofocus: true, id:"inputAddress", placeholder: "東京都渋谷区代々木神園町0-0" %>
+  <%= f.file_field :last_name, autofocus: true, id:"inputLastName",　placeholder: "令和" %>
+  <%= f.text_field :first_name, autofocus: true, id:"inputFirstName", placeholder:"道子" %>
+
+  <p>支払方法</p>
+  <%= f.text_field :is_deleted, autofocus: true, id:"inputIsDleted" %>
+
+  <div class="row">
+    <div class="col-md-8 offset-md-1">
+      <table class="table table-hover table-inverse">
+        <thead>
+          <tr>
+            <th>商品名</th>
+            <th>単価（税込）</th>
+            <th>数量</th>
+            <th>小計</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @items.each do |item| %>
+          <tr>
+            <td><%= item.name %></td>
+            <td><%= item.price %></td>
+            <td><%= cart_items.amount %></td>
+            <td><%= item.price %></td>
+            <td></td>
+          </tr>
+          <% end %>
+        </tbody>
+
+      </table>
+    </div>
+
+    <div class="col-md-3">
+
+      <p>商品合計</p>
+
+      <p>送料</p>
+
+      <p>請求金額合計</p>
+
+
+    </div>
+  </div>
+</div>
