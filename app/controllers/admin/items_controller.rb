@@ -9,9 +9,9 @@ class Admin::ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    if @item.save
+    if @item.save!
       flash[:notice] = "Item was successfully created."
-      redirect_to admin_items_path(@item.id)
+      redirect_to admin_items_path(@item)
     else
       @items = Item.all
       render :index
@@ -40,7 +40,7 @@ class Admin::ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :introduction, :price, :item_image)
+    params.require(:item).permit(:name, :introduction, :price, :item_image, :genre_id)
   end
 
 end

@@ -20,12 +20,13 @@ Rails.application.routes.draw do
     patch 'genres/:id', to: 'genres#update'
   end
   namespace :admin do
-    get 'items', to: 'items#index'
-    get 'items/new'
-    post 'items', to: 'items#create'
-    get 'items/:id', to: 'items#show'
-    get 'items/:id/edit', to: 'items#edit'
-    patch 'items/:id', to: 'items#update'
+    resources :items
+    # get 'items', to: 'items#index'
+    # get 'items/new'
+    # # post 'items', to: 'items#create',as: "items"
+    # get 'items/:id', to: 'items#show'
+    # get 'items/:id/edit', to: 'items#edit'
+    # patch 'items/:id', to: 'items#update'
   end
   namespace :admin do
     root to: 'homes#top'

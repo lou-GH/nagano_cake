@@ -29,13 +29,13 @@
         </thead>
 
         <tbody>
-          <%= @genres.each do |genres| %>
+          <% @genres.each do |genre| %>
           <tr>
             <td>
               <%= genre.name %>
             </td>
             <td>
-              <%= link_to "編集する", genres_path(genres) %>
+              <%= link_to "編集する", genres_path(genre) %>
             </td>
             <td></td>
           </tr>

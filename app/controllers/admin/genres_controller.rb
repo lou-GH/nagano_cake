@@ -24,8 +24,8 @@ class Admin::GenresController < ApplicationController
 
   private
 
-  def book_params
-    params.require(:book).permit(:title, :body)
+  def genre_params
+    params.require(:genre).permit(:name)
   end
 
 end
