@@ -7,6 +7,16 @@ class Public::CartItemsController < ApplicationController
     # どの商品の個数を変更するか
     # 商品の変更update
     # どこのページにとぶのか
+    @cart_item = CartItem.find(params[:id])
+    if @cart_item.update(cart_item_params)
+      flash[:notice] = "CartItem  was successfully update."
+      @cart_items = current_customer.cart_items
+      redirect_to cart_items_path
+    else
+      @cart_items = current_customer.cart_items
+      render :index
+
+    end
   end
 
   def destroy
@@ -17,7 +27,7 @@ class Public::CartItemsController < ApplicationController
 
   def destroy_all
     # 全部の商品
-    
+
     current_customer.cart_items.destroy_all
     # どこのページにとぶか
   end

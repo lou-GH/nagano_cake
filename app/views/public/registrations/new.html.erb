@@ -10,9 +10,9 @@
   </div>
 
   <div class="field">
-    <p>名前</p>
-    (姓)<%= f.text_field :last_name_kana, autofocus: true, id:"inputLastName",　placeholder: "令和" %>
-    (名)<%= f.text_field :first_name_kana, autofocus: true, id:"inputFirstName", placeholder:"道子" %>
+    <p>フリガナ</p>
+    (セイ)<%= f.text_field :last_name_kana, autofocus: true, id:"inputLastName",　placeholder: "レイワ" %>
+    (メイ)<%= f.text_field :first_name_kana, autofocus: true, id:"inputFirstName", placeholder:"ミチコ" %>
   </div>
 
   <div class="field">
@@ -57,7 +57,7 @@
 <% end %>
 
 <h2>既に登録済みの方</h2>
-  <%= link_to root_path do %>
+  <%= link_to new_customer_session_path do %>
     こちら
   <% end %>
   からログインしてください。

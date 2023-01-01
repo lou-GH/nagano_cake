@@ -10,4 +10,8 @@ class Customer < ApplicationRecord
 
   enum is_deleted: { false: 0, turu: 1 }
 
+  def active_for_authentication?
+    super && (is_deleted == false)
+  end
+
 end

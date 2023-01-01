@@ -20,9 +20,19 @@ class Public::OrdersController < ApplicationController
     @order = current_customer.orders.new(order_params)
     if @order.save
       cart_items.each do |cart|
-        order = Order.new
-        order.item_id = cart.item_id
-        order
+        order_detail = OrderDetail.new
+        order_detail.item_id = CartItem.item_id
+        order_detail.order_id = @order.id
+        order_detail.amount = CartItem.item.amount
+        order_detail.tax_price = CartItem.subtotal
+        order_detail.save
+      end
+      redirect_to new_order_path
+      cart_items.destroy_all
+    else
+      @order = Order.new(order_params)
+      render :new
+    end
   end
 
   def index
