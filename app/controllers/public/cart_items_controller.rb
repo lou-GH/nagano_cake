@@ -23,13 +23,29 @@ class Public::CartItemsController < ApplicationController
     # どの商品のデータ
     # 商品削除destroy
     # どこのページに飛ぶのか
+    @cart_item = CartItem.find(params[:id])
+    if @cart_item.destroy(cart_item_params)
+      flash[:notice] = "CartItem  was successfully destroy."
+      @cart_items = current_customer.cart_items
+      redirect_to cart_items_path
+    else
+      @cart_items = current_customer.cart_items
+      render :index
+    end
   end
 
   def destroy_all
     # 全部の商品
-
-    current_customer.cart_items.destroy_all
+    @cart_items = current_customer.cart_items
+    if @cart_items.destroy_all
     # どこのページにとぶか
+      flash[:{notice}] = "CartItems was successfully destroy_all."
+      @cart_items = current_customer.cart_items
+      redirect_to cart_items_path
+    else
+      @cart_items = current_customer.cart_items
+      render :index
+    end
   end
 
   def create
