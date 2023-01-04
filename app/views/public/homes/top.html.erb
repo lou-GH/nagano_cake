@@ -1,9 +1,33 @@
-<h4>
-  ようこそ、ながのCAKEへ！<br>
-  このサイトは、ケーキ販売のECサイトになります。<br>
-  会員でない方も商品の閲覧はできますが、<br>
-  購入には会員登録が必須になります。
-</h4>
+<script src="https://kit.fontawesome.com/6fd84a1e7d.js" crossorigin="anonymous"></script>
 
-<h2>新着商品</h2>
+<div class="container px-5 px-sm-0">
+  <div class="text-center">
+    ようこそ、ながのCAKEへ！<br>
+    このサイトは、ケーキ販売のECサイトになります。<br>
+    会員でない方も商品の閲覧はできますが、<br>
+    購入には会員登録が必須になります。
+  </div>
 
+  <h2>新着商品</h2>
+
+  <div class="row">
+    <% @items.each do |item| %>
+      <div class="col-md-2 offset-md-1">
+
+        <%= link_to item_path(item) do %>
+          <%= image_tag item.get_item_image(100,80) %>
+        <% end %>
+
+        <%= item.name %>
+
+        ￥<%= item.with_tax_price %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="text-right">
+    <%= link_to items_path do %>
+      全ての商品を見る>
+    <% end %>
+  </div>
+</div>
