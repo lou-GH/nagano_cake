@@ -1,6 +1,7 @@
 class Public::CartItemsController < ApplicationController
   def index
     @cart_items = current_customer.cart_items
+    @total = 0
   end
 
   def update
@@ -9,7 +10,7 @@ class Public::CartItemsController < ApplicationController
     # どこのページにとぶのか
     @cart_item = CartItem.find(params[:id])
     if @cart_item.update(cart_item_params)
-      flash[:notice] = "CartItem  was successfully update."
+      flash[:notice] = "Cart Item  was successfully update."
       @cart_items = current_customer.cart_items
       redirect_to cart_items_path
     else
@@ -25,7 +26,7 @@ class Public::CartItemsController < ApplicationController
     # どこのページに飛ぶのか
     @cart_item = CartItem.find(params[:id])
     if @cart_item.destroy(cart_item_params)
-      flash[:notice] = "CartItem  was successfully destroy."
+      flash[:notice] = "Cart Item  was successfully destroy."
       @cart_items = current_customer.cart_items
       redirect_to cart_items_path
     else
@@ -39,7 +40,7 @@ class Public::CartItemsController < ApplicationController
     @cart_items = current_customer.cart_items
     if @cart_items.destroy_all
     # どこのページにとぶか
-      flash[:{notice}] = "CartItems was successfully destroy_all."
+      flash[:notice] = "Cart Items was successfully destroy all."
       @cart_items = current_customer.cart_items
       redirect_to cart_items_path
     else

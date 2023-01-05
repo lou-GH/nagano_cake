@@ -22,7 +22,7 @@
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
       <% if admin_signed_in? %>
-        <% if request.fullpath.include? "/admin" %>
+        <%# if request.fullpath.include? "/admin" %>
           <li class="nav-item">
             <%= link_to admin_items_path, class: 'nav-link text-white' do %>
               商品一覧
@@ -48,35 +48,12 @@
               ログアウト
             <% end %>
           </li>
-        <% else %>
-        <!--user側のheaderを返す-->
-          <li class="nav-item">
-            <%= link_to about_path, class: 'nav-link text-white' do %>
-              About
-            <% end %>
-          </li>
-          <li class="nav-item">
-            <%= link_to items_path, class: 'nav-link text-white' do %>
-              商品一覧
-            <% end %>
-          </li>
-          <li class="nav-item">
-            <%= link_to new_customer_registration_path, class: 'nav-link text-white' do %>
-              新規登録
-            <% end %>
-          </li>
-          <li class="nav-item">
-            <%= link_to new_customer_session_path, class: 'nav-link text-white' do %>
-              ログイン
-            <% end %>
-          </li>
-        <% end %>
-      <% elsif customer_signed_in? %>
+          <% elsif customer_signed_in? %>
       <!--userログインの状態時表示したいheaderのメニュ-->
-          ようこそ、<%= current_user.last_name %>さん！
+          ようこそ、<%= current_customer.last_name %>さん！
 
           <li class="nav-item">
-            <%= link_to customers_my_page_path(current_user.id), class: 'nav-link text-white' do %>
+            <%= link_to customers_my_page_path(current_customer.id), class: 'nav-link text-white' do %>
               マイページ
             <% end %>
           </li>
@@ -95,6 +72,7 @@
               ログアウト
             <% end %>
           </li>
+
       <% else %>
       <!--ログインしてないときに表示する-->
         <li class="nav-item">
