@@ -10,17 +10,21 @@
     </div>
 
     <div class="col-md-8 offset-md-1">
-      <% @items.each do |item| %>
+      <div class="row">
+        <div class="col-md-2">
+          <% @items.each do |item| %>
 
-        <%= link_to item_path(item) do %>
-          <%= image_tag item.get_item_image(100,80) %>
-        <% end %>
+            <%= link_to item_path(item) do %>
+              <%= image_tag item.get_item_image(100,80) %>
+            <% end %>
 
-        <div>商品名</div>
-        <%= item.name %>
+            <%= item.name %>
 
-        ￥<%= item.with_tax_price %>
-      <% end %>
+            ￥<%= item.with_tax_price %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
+  <%= paginate items %>
 </div>
