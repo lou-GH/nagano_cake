@@ -5,26 +5,28 @@
   <h2>商品一覧</h2><p>(全<% Item.count %>件)</p>
 
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-2">
 
     </div>
 
-    <div class="col-md-8 offset-md-1">
+    <div class="col-md-10">
       <div class="row">
-        <div class="col-md-2">
-          <% @items.each do |item| %>
 
-            <%= link_to item_path(item) do %>
-              <%= image_tag item.get_item_image(100,80) %>
-            <% end %>
+        <% @items.each do |item| %>
+          <div class="col-md-2 offset-md-0">
 
-            <%= item.name %>
-
-            ￥<%= item.with_tax_price %>
+          <%= link_to item_path(item) do %>
+            <%= image_tag item.get_item_image(160,100) %>
           <% end %>
-        </div>
+          <br>
+
+          <%= item.name %><br>
+
+          ￥<%= item.with_tax_price %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
-  <%= paginate items %>
+  <%= paginate @items %>
 </div>

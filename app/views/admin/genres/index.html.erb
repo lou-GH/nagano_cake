@@ -10,7 +10,7 @@
 
         <h4>ジャンル名</h4>
         <%= f.text_field :name %>
-        <%= f.submit '新規登録' %>
+        <button type="submit" class="btn btn-success">新規登録</button>
 
       <% end %>
     </div>
@@ -35,7 +35,9 @@
               <%= genre.name %>
             </td>
             <td>
-              <%= link_to "編集する", edit_admin_genre_path(genre) %>
+              <%= link_to edit_admin_genre_path(genre) do %>
+                <button type="button" class="btn btn-success">編集する</button>
+              <% end %>
             </td>
             <td></td>
           </tr>

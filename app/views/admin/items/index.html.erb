@@ -4,9 +4,12 @@
     </div>
 
     <div class="col-md-10 offset-md-1">
-
-      <h2>商品一覧</h2>
-
+      <h2 class="float-left">商品一覧</h2>
+      <div class="text-right">
+        <%= link_to new_admin_item_path do %>
+          <button type="button" class="btn btn-outline-dark rounded-circle p-0" style="width:2rem;height:2rem;">＋</button>
+        <% end %>
+      </div>
 
       <table class="table table-hover table-inverse">
         <thead>
@@ -14,6 +17,7 @@
             <th>商品ID</th>
             <th>商品名</th>
             <th>税抜価格</th>
+            <th>ジャンル</th>
             <th colspan="3"></th>
           </tr>
         </thead>
@@ -25,17 +29,20 @@
               <%= item.id %>
             </td>
             <td>
-              <%= link_to admin_items_path(item) do %>
+              <%= link_to admin_item_path(item) do %>
                 <%= item.name %>
               <% end %>
             </td>
             <td><%= item.price %></td>
+            <td><%= item.genre.name %></td>
           </tr>
           <% end %>
         </tbody>
 
       </table>
-      <%= paginate items %>
+      <div class="text-center">
+        <%= paginate @items %>
+      </div>
     </div>
 
   </div>

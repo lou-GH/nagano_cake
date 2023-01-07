@@ -17,9 +17,18 @@ class Admin::GenresController < ApplicationController
   end
 
   def edit
+    @genre = Genre.find_by(id: params[:id])
   end
 
   def update
+    @genre = Genre.find_by(id: params[:id])
+    if @genre.update(genre_params)
+      flash[:notice] = "genre was successfully updated."
+      redirect_to admin_genres_path
+    else
+      @genre = Genre.find_by(id: params[:id])
+      render :edit
+    end
   end
 
   private

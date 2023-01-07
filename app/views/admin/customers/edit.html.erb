@@ -1,19 +1,19 @@
-<%= form_with model: @customer do |f| %>
+<%= form_with model: @customer, url: admin_customers_path do |f| %>
 
-<h2><%= customer.last_name %>" "<%= customer.first_name %>さんの会員情報編集</h2>
+<h2><%= @customer.last_name %><%= @customer.first_name %>さんの会員情報編集</h2>
 
 <p>会員ID</p>
-<%= customer.id %>
+<%= @customer.id %>
 
 <p>氏名</p>
 <label for="inputLastName"></label>
-<%= f.file_field :last_name, autofocus: true, id:"inputLastName",　placeholder: "令和" %>
+<%= f.text_field :last_name, autofocus: true, id:"inputLastName",　placeholder: "令和" %>
 <label for="inputFirstName"></label>
 <%= f.text_field :first_name, autofocus: true, id:"inputFirstName", placeholder:"道子" %>
 
 <p>フリガナ</p>
 <label for="inputLastNameKana"></label>
-<%= f.file_field :last_name_kana, autofocus: true, id:"inputLastNameKana",　placeholder: "レイワ" %>
+<%= f.text_field :last_name_kana, autofocus: true, id:"inputLastNameKana",　placeholder: "レイワ" %>
 <label for="inputFirstName"></label>
 <%= f.text_field :first_name_kana, autofocus: true, id:"inputFirstNameKana", placeholder: "ミチコ" %>
 
@@ -35,9 +35,13 @@
 
 <p>会員ステータス</p>
 <label for="inputIsDeleted"></label>
-<%= f.radio_button :is_deleted, :ture, autofocus: true, id:"inputIsDleted" %>
 <%= f.radio_button :is_deleted, :false, autofocus: true, id:"inputIsDleted" %>
+有効
+<%= f.radio_button :is_deleted, :ture, autofocus: true, id:"inputIsDleted" %>
+退会
 
-<%= f.submit '変更を保存' %>
+<div class="text-center">
+  <button type="submit" class="btn btn-success">変更を保存</button>
+</div>
 
 <% end %>

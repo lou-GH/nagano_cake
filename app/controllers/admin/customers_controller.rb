@@ -10,11 +10,18 @@ class Admin::CustomersController < ApplicationController
   end
 
   def edit
+    @customer = Customer.find(params[:id])
   end
 
   def update
-    @customer.update(customer_params)
-    redirect_to request.referer, notice: 'Successfully updated customer status'
+    @customer = Customer.find(params[:id])
+    if @customer.update(customer_params)
+      flash[:notice] = 'Successfully updated customer'
+      redirect_to admin_customer_path(@customer.id)
+    else
+      @customer = Customer.find(params[:id])
+      render :edit
+    end
   end
 
   private

@@ -6,24 +6,30 @@
 
   <div class="row">
     <div class="col-md-3">
-      <%= image_tag item.get_iteme_image(120,80) %>
+      <%= image_tag @item.get_item_image(180,120) %>
     </div>
 
-    <div class="col-md-8 offset-md-1">
+    <div class="col-md-2 offset-md-1">
 
       <div>商品名</div>
-      <%= item.name %>
-
       <div>商品説明</div>
-      <%= item.introduction %>
-
       <div>税込価格<br>(税抜価格)</div>
-      <%= tax_price %> (<%= item.price.to_s(:delimited) %>)円
 
-      <%= link_to admin_items_(@item)edit_path do %>
-        <%= f.submit '編集する' %>
-      <% end %>
+    </div>
+
+    <div class="col-md-5 offset-md-1">
+
+      <%= @item.name %><br>
+      <%= @item.introduction %><br>
+      <%= @item.with_tax_price %> (<%= @item.price %>)円
 
     </div>
   </div>
+
+  <div class="text-center">
+    <%= link_to edit_admin_item_path(@item) do %>
+      <button type="submit" class="btn btn-success">編集する</button>
+    <% end %>
+  </div>
+
 </div>

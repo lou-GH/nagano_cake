@@ -1,39 +1,55 @@
 <div class="container px-5 px-sm-0">
 
-  <h2><%= customer.last_name %>" "<%= customer.first_name %>さんの会員詳細</h2>
+  <h2><%= @customer.last_name %><%= @customer.first_name %>さんの会員詳細</h2>
 
-    <p>会員ID</p>
-    <%= customer.id %>
+  <table class="table table-borderless">
+    <thead>
+      <tr></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>会員ID</th>
+        <td><%= @customer.id %></td>
+      </tr>
+      <tr>
+        <th>氏名</th>
+        <td><%= @customer.last_name %><%= @customer.first_name %></td>
+      </tr>
+      <tr>
+        <th>フリガナ</th>
+        <td><%= @customer.last_name_kana %><%= @customer.first_name_kana %></td>
+      </tr>
+      <tr>
+        <th>郵便番号</th>
+        <td><%= @customer.postal_code %></td>
+      </tr>
+      <tr>
+        <th>住所</th>
+        <td><%= @customer.address %></td>
+      </tr>
+      <tr>
+        <th>電話番号</th>
+        <td><%= @customer.telephone_number %></td>
+      </tr>
+      <tr>
+        <th>メールアドレス</th>
+        <td><%= @customer.email %></td>
+      </tr>
+      <tr>
+        <th>会員ステータス</th>
+        <td><%= @customer.customer_status %></td>
+      </tr>
+    </tbody>
+  </table>
 
-    <p>氏名</p>
-    <%= f.file_field :last_name, autofocus: true, id:"inputLastName",　placeholder: "令和" %>
-    <%= f.text_field :first_name, autofocus: true, id:"inputFirstName", placeholder:"道子" %>
-
-    <p>フリガナ</p>
-    <%= f.file_field :last_name_kana, autofocus: true, id:"inputLastNameKana",　placeholder: "レイワ" %>
-    <%= f.text_field :first_name_kana, autofocus: true, id:"inputFirstNameKana", placeholder: "ミチコ" %>
-
-    <p>郵便番号</p>
-    <%= f.text_field :postal_code, autofocus: true, id:"inputPostalCode", placeholder: "0000000" %>
-
-    <p>住所</p>
-    <%= f.text_field :address, autofocus: true, id:"inputAddress", placeholder: "東京都渋谷区代々木神園町0-0" %>
-
-    <p>電話番号</p>
-    <%= f.text_field :postal_code, autofocus: true, id:"inputPostalCode", placeholder: "0000000" %>
-
-    <p>メールアドレス</p>
-    <%= f.text_field :email, autofocus: true, id:"inputEmail", placeholder: "sample@example.com" %>
-
-    <p>会員ステータス</p>
-    <%= f.text_field :is_deleted, autofocus: true, id:"inputIsDleted" %>
-
-    <%= link_to admin_customers_(@customer)edit_path do %>
-      <%= f.submit '編集する' %>
+  <div class="text-center">
+    <%= link_to edit_admin_customer_path(@customer) do %>
+      <button type="submit" class="btn btn-success">編集する</button>
     <% end %>
 
-    <%= link_to admin_customers_path do %>
-      <%= f.submit '注文履歴一覧を見る' %>
+    <%= link_to admin_root_path do %>
+      <button type="submit" class="btn btn-primary">注文履歴一覧を見る</button>
     <% end %>
+  </div>
 
 </div>

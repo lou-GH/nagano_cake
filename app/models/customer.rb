@@ -14,4 +14,12 @@ class Customer < ApplicationRecord
   #   super && (is_deleted == false)
   # end
 
+  def customer_status
+    if is_deleted
+      "退会"
+    else
+      "有効"
+    end
+  end
+
 end
