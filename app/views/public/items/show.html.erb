@@ -6,26 +6,28 @@
 
   <div class="row">
     <div class="col-md-3">
-      <%= image_tag @item.get_item_image(120,80) %>
+      <%= image_tag @item.get_item_image(200,160) %>
     </div>
 
     <div class="col-md-8 offset-md-1">
 
-      <div>商品名</div>
-      <%= @item.name %>
+      <div class="lead font-weight-bold"><%= @item.name %></div>
 
-      <div>商品説明</div>
       <%= @item.introduction %>
 
-      <div>税込価格<br>(税抜価格)</div>
-      <%= @item.with_tax_price %> (<%= @item.price.to_s(:delimited) %>)円
+      <div class="row">
+        <div class="lead font-weight-bold">
+          ￥<%= @item.with_tax_price %>
+        </div>
+        <div>(税込)</div>
+      </div>
 
       <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
 
         <%= f.hidden_field :item_id,value: @item.id %>
-        
 
-        <%= f.select :amount, *[1..10] %>
+
+        <%= f.select :amount, *[1..10], { include_blank: '個数選択' } %>
 
         <%= f.submit 'カートに入れる', class: 'btn btn-success btn-sm' %>
 

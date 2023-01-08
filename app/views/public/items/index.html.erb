@@ -2,7 +2,7 @@
 
 <div class="container px-5 px-sm-0">
 
-  <h2>商品一覧</h2><p>(全<% Item.count %>件)</p>
+  <h2>商品一覧</h2><p>(全<%= @all_items.count %>件)</p>
 
   <div class="row">
     <div class="col-md-2">
@@ -13,7 +13,7 @@
       <div class="row">
 
         <% @items.each do |item| %>
-          <div class="col-md-2 offset-md-0">
+          <div class="col-md-3 offset-md-0">
 
           <%= link_to item_path(item) do %>
             <%= image_tag item.get_item_image(160,100) %>
