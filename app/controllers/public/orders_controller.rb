@@ -16,6 +16,8 @@ class Public::OrdersController < ApplicationController
       @order.shipping_name = @address.first_name + @address.last_name
     end
 
+    @cart_items = current_customer.cart_items.all
+    @total = 0
 
   end
 
