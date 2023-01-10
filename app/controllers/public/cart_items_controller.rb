@@ -25,7 +25,7 @@ class Public::CartItemsController < ApplicationController
     # 商品削除destroy
     # どこのページに飛ぶのか
     @cart_item = CartItem.find(params[:id])
-    if @cart_item.destroy(cart_item_params)
+    if @cart_item.destroy
       flash[:notice] = "Cart Item  was successfully destroy."
       @cart_items = current_customer.cart_items
       redirect_to cart_items_path
@@ -52,6 +52,8 @@ class Public::CartItemsController < ApplicationController
   def create
       @cart_item = CartItem.new(cart_item_params)
       @cart_item.customer_id = current_customer.id
+      @update_cart_item =  current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
+
 
     # if current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id]).present?
     #   cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
@@ -59,7 +61,11 @@ class Public::CartItemsController < ApplicationController
     #   cart_item.save
     #   flash[:notice] = '商品の個数を変更しました。'
     #   redirect_to cart_items_path
-
+    if @update_cart_item.present?
+      # @cart_item.amount + @update_cart_item.amount = @cart_item.amount
+      @cart_item.amount += @update_cart_item.amount
+      @update_cart_item.destroy
+    end
     if @cart_item.save
       flash[:notice] = '商品が追加されました。'
       redirect_to cart_items_path

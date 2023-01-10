@@ -5,11 +5,18 @@ class Public::OrdersController < ApplicationController
 
   def confirm
     @order = Order.new(order_params)
-    binding.pry
-    @address = Address.find(params[:order][:address_id])
-    @order.postal_code = current_customer.postal_code
-    @order.address = current_customer.address
-    @order.name = current_customer.first_name + current_customer.last_name
+    if params[:order][:select_address] == 0
+      @order.shipping_postal_code = current_customer.postal_code
+      @order.shipping_address = current_customer.address
+      @order.shipping_name = current_customer.first_name + current_customer.last_name
+    elsif params[:order][:select_address] == 1
+      @address = Address.find(params[:order][:address_id])
+      @order.shipping_postal_code = @address.postal_code
+      @order.shipping_address = @address.address
+      @order.shipping_name = @address.first_name + @address.last_name
+    end
+
+
   end
 
   def complete
@@ -43,7 +50,7 @@ class Public::OrdersController < ApplicationController
 
   private
   def order_params
-    params.require(:order).permit(:payment_method, :postal_code, :address, :name)
+    params.require(:order).permit(:payment_method, :shipping_postal_code, :shipping_address, :shipping_name)
   end
 
 end

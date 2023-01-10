@@ -56,11 +56,12 @@ Rails.application.routes.draw do
     # get 'orders', to: 'cart_items#index'
     # get 'orders/:id', to: 'cart_items#show'
 
+    delete 'cart_items/destroy_all'
     resources :cart_items, only: [:index, :update, :destroy, :create]
     # get 'cart_items', to: 'cart_items#index'
     # patch 'cart_items/:id', to: 'cart_items#update'
     # delete 'cart_items/:id', to: 'cart_items#destroy'
-    delete 'cart_items/destroy_all'
+
     # post 'cart_items', to: 'cart_items#create'
 
     get 'customers/my_page', to: 'customers#show'

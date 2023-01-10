@@ -18,7 +18,7 @@
   <%= @order.address %>
 
 
-<%= form_with model: @order, url: create へのパス, local: true do |f| %>
+<%= form_with model: @order, url: orders_path, local: true do |f| %>
   <%= f.hidden_field :name %>
   <%= f.hidden_field :address %>
   <%= f.hidden_field :total_price, value: @total %>
