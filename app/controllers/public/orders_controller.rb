@@ -1,10 +1,15 @@
 class Public::OrdersController < ApplicationController
   def new
     @order = Order.new
+    @addresses = Address.all
   end
 
   def confirm
     @order = Order.new(order_params)
+    @total = 0
+    @cart_items = current_customer.cart_items.all
+    @shipping_fee = 800
+
     if params[:order][:select_address] == 0
       @order.shipping_postal_code = current_customer.postal_code
       @order.shipping_address = current_customer.address
@@ -14,10 +19,18 @@ class Public::OrdersController < ApplicationController
       @order.shipping_postal_code = @address.postal_code
       @order.shipping_address = @address.address
       @order.shipping_name = @address.first_name + @address.last_name
+    elsif params[:order][:select_address] == 2
+      @order.customer_id = current_customer.id
     end
+      @cart_items = current_customer.cart_items
+      @order = Order.new
+      render :confirm
 
-    @cart_items = current_customer.cart_items.all
-    @total = 0
+    # if params[:order][:payment_method] == "credit_card"
+      # "クレジットカード"
+    # else
+      # "銀行振込"
+    # end
 
   end
 
@@ -27,16 +40,17 @@ class Public::OrdersController < ApplicationController
   def create
     cart_items = current_customer.cart_items.all
     @order = current_customer.orders.new(order_params)
+
     if @order.save
-      cart_items.each do |cart|
+      @cart_items.each do |cart|
         order_detail = OrderDetail.new
-        order_detail.item_id = CartItem.item_id
+        order_detail.item_id = cart.item_id
         order_detail.order_id = @order.id
-        order_detail.amount = CartItem.item.amount
-        order_detail.tax_price = CartItem.subtotal
+        order_detail.amount = cart.amount
+        order_detail.tax_price = cart.subtotal
         order_detail.save
       end
-      redirect_to new_order_path
+      redirect_to orders_complete_path
       cart_items.destroy_all
     else
       @order = Order.new(order_params)
@@ -45,14 +59,23 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
+    @orders = Order.all
   end
 
   def show
   end
 
   private
+
   def order_params
-    params.require(:order).permit(:payment_method, :shipping_postal_code, :shipping_address, :shipping_name)
+    params.require(:order).permit(:payment_method, :shipping_postal_code, :shipping_address, :shipping_name, :shipping_fee, :invoice_amount)
+  end
+
+  def cartitem_nill
+    cart_items = current_end_user.cart_items
+    if cart_items.blank?
+　　  redirect_to cart_items_path
+    end
   end
 
 end
