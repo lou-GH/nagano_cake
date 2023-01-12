@@ -1,0 +1,21 @@
+<%= form_with model: @address, url: address_path(@address) do |f| %>
+
+<h2>配送先編集</h2>
+
+<p>郵便番号(ハイフンなし)</p>
+<label for="inputPostalCode"></label>
+<%= f.text_field :postal_code, autofocus: true, id:"inputPostalCode", placeholder: "0000000" %>
+
+<p>住所</p>
+<label for="inputAddress"></label>
+<%= f.text_field :address, autofocus: true, id:"inputAddress", placeholder: "東京都渋谷区代々木神園町0-0" %>
+
+<p>氏名</p>
+<label for="inputName"></label>
+<%= f.text_field :name, autofocus: true, id:"inputName",　placeholder: "令和道子" %>
+
+<div class="text-right">
+  <button type="submit" class="btn btn-success">変更内容を保存</button>
+</div>
+
+<% end %>

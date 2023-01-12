@@ -1,4 +1,4 @@
-<%= form_with model: @customer, url: admin_customers_path do |f| %>
+<%= form_with model: @customer, url: admin_customer_path(current.customer.id) do |f| %>
 
 <h2><%= @customer.last_name %><%= @customer.first_name %>さんの会員情報編集</h2>
 

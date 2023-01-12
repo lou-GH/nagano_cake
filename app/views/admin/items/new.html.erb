@@ -18,17 +18,19 @@
       <%= f.text_area :introduction, placeholder: "ここに説明文を記述します" %>
     </div>
 
+    <div>ジャンル<br>
+      <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name) %>
+    </div>
+
     <div>税抜価格<br>
       <%= f.text_field :price, placeholder: "1000" %>円
     </div>
 
-    <div>ジャンル<br>
-      <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name) %>
       <br>
       <br>
 
       <button type="submit" class="btn btn-success">新規登録</button>
-    </div>
+
   </div>
 </div>
 <% end %>

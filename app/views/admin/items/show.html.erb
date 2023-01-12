@@ -13,6 +13,7 @@
 
       <div>商品名</div>
       <div>商品説明</div>
+      <div>ジャンル</div>
       <div>税込価格<br>(税抜価格)</div>
 
     </div>
@@ -21,6 +22,7 @@
 
       <%= @item.name %><br>
       <%= @item.introduction %><br>
+      <%= @item.genre.name %><br>
       <%= @item.with_tax_price %> (<%= @item.price %>)円
 
     </div>

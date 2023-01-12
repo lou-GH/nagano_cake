@@ -48,13 +48,14 @@ Rails.application.routes.draw do
     # get 'addresses/:id', to: 'address#update'
     # get 'addresses/:id', to: 'address#destroy'
 
-    resources :orders, only: [:new, :create, :index, :show]
+
     # get 'orders/new'
     post 'orders/confirm'
     get 'orders/complete'
     # post 'orders', to: 'cart_items#create'
     # get 'orders', to: 'cart_items#index'
     # get 'orders/:id', to: 'cart_items#show'
+    resources :orders, only: [:new, :create, :index, :show]
 
     delete 'cart_items/destroy_all'
     resources :cart_items, only: [:index, :update, :destroy, :create]
