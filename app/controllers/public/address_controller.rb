@@ -1,5 +1,7 @@
 class Public::AddressController < ApplicationController
   def index
+    @address = Address.new
+    @addresses = Address.all
   end
 
   def edit
