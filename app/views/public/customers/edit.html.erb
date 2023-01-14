@@ -1,5 +1,6 @@
 <%= form_with model: @customer, url: customers_my_page_path do |f| %>
 
+<div class="container px-5 px-sm-0">
 <h2>会員情報編集</h2>
 
 <p>氏名</p>
@@ -30,12 +31,17 @@
 <label for="inputEmail"></label>
 <%= f.text_field :email, autofocus: true, id:"inputEmail", placeholder: "sample@example.com" %>
 
-<div class="text-center">
-  <button type="submit" class="btn btn-success">編集内容を保存</button>
+<div class="row">
+  <div class="col-md-3 offset-md-1">
+    <button type="submit" class="btn btn-success">編集内容を保存</button>
+  </div>
+
+    <% end %>
+
+  <div class="col-md-3 offset-md-2">
+    <%= link_to customers_unsubscribe_path do %>
+      <button type="button" class="btn btn-danger">退会する</button>
+    <% end %>
+  </div>
 </div>
-
-<% end %>
-
-<%= link_to customers_unsubscribe_path do %>
-  <button type="button" class="btn btn-danger">退会する</button>
-<% end %>
+</div>

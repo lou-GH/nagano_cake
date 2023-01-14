@@ -6,8 +6,8 @@ class Order < ApplicationRecord
 
   enum order_status: {wait_payment: 0, confirm_payment: 1, making: 2, preparing_ship: 3, finish_prepare: 4}
 
-  def subtotal
-    order_details.tax_price * order_details.amount
-  end
+  # def subtotal
+    # @order_details.tax_price * @order_details.amount
+  # end
 
 end
