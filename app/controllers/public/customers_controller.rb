@@ -9,11 +9,11 @@ class Public::CustomersController < ApplicationController
   end
 
   def unsubscribe
-    @customer = Customer.find_by(params[:id])
+    @customer = current_customer
   end
 
   def withdraw
-    @customer = Customer.find(params[:id])
+    @customer = current_customer
     @customer.update(is_deleted: true)
     reset_session
     flash[:notice] = "退会処理を実行いたしました"

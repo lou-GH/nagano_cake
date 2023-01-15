@@ -6,11 +6,15 @@
 
 <h2>注文履歴詳細</h2>
 
-<%= form_with model: @order, url: admin_orders_path, method: :patch, local: true do |f| %>
+<%= form_with model: @order, url: admin_order_path(@order), method: :patch, local: true do |f| %>
   <table>
     <tr>
       <td>購入者</td>
-      <td><%= @order.customer.first_name %><%= @order.customer.last_name %></td>
+      <td>
+        <%= link_to admin_customer_path(@order.customer) do %>
+          <%= @order.customer.first_name %><%= @order.customer.last_name %>
+        <% end %>
+      </td>
     </tr>
     <tr>
       <td>注文日</td>
@@ -19,7 +23,7 @@
     <tr>
       <td>配送先</td>
       <td>
-        <%= @order.shipping_postal_code%><%= @order.shipping_address %><br>
+        〒<%= @order.shipping_postal_code%><%= @order.shipping_address %><br>
         <%= @order.shipping_name %>
       </td>
     </tr>
@@ -47,16 +51,21 @@
       <th>製作ステータス</th>
     </tr>
   </thead>
-  <% @order_details.each do |order_detail| %>
 
   <% @total = 0 %>
-  <% @total += order_detail.item.with_tax_price %>
 
-  <%= form_with model: order_detail , url: admin_order_details_path(order_detail.id) , method: :patch , local: true do |f| %>
+  <%= form_with model: @order_details , url: admin_order_detail_path(@order_details) , method: :patch , local: true do |f| %>
+
   <tbody>
+    <% @order_details.each do |order_detail| %>
     <tr>
       <td><%= order_detail.item.name %></td>
-      <td><%= order_detail.item.with_tax_price %></td>
+      <td><%= (order_detail.item.with_tax_price).floor.to_s(:delimited) %></td>
+      <td><%= order_detail.amount %></td>
+      <td>
+        ￥<%= (order_detail.tax_price * order_detail.amount).to_s(:delimited) %>
+        <% @total += (order_detail.tax_price * order_detail.amount) %>
+      </td>
       <td>
         <%= f.select :manufacture_status, OrderDetail.manufacture_statuses_i18n.invert %>
         <%= f.submit "更新", class: "btn btn-success" %>
@@ -65,16 +74,21 @@
     <% end %>
   </table>
 
+ <div class="col-md-4 offset-md-7">
+  <table>
     <tr>
       <td>商品合計</td>
       <td><%= @total %>円</td>
     </tr>
     <tr>
       <td>送料</td>
-      <td>800円</td>
+      <td><%= @shipping_fee %>円</td>
     </tr>
     <tr>
       <td>請求金額合計</td>
-      <td><%= @total + 800 %>円</td>
+      <td><%= @total + @shipping_fee %>円</td>
     </tr>
+  </table>
 <% end %>
+
+</div>

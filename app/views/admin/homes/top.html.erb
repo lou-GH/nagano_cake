@@ -30,7 +30,13 @@
             <td>
               <%= order.customer.last_name %><%= order.customer.first_name %>
             </td>
-            <td><%= @order_details.sum(:amount) %></td>
+            <td>
+              <% @amount_total = 0 %>
+              <% order.order_details.each do |order_detail| %>
+                <% @amount_total += order_detail.amount %>
+              <% end %>
+              <%= @amount_total %>
+            </td>
             <td><%= order.order_status_i18n %></td>
           </tr>
           <% end %>

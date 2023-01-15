@@ -50,7 +50,9 @@
           </li>
           <% elsif customer_signed_in? %>
       <!--userログインの状態時表示したいheaderのメニュ-->
-          ようこそ、<%= current_customer.last_name %>さん！
+          <div class="text-white">
+            ようこそ、<%= current_customer.last_name %>さん！
+          </div>
 
           <li class="nav-item">
             <%= link_to customers_my_page_path(current_customer.id), class: 'nav-link text-white' do %>
@@ -107,7 +109,7 @@
     <%= yield %>
     </main>
 
-    <footer class="bg-white text-dark pt-5 pb-4">
+    <footer class="navbar navbar-dark bg-dark">>
       <div class="container">
         <div class="row no-gutters">
           <div class="col-md-4">
