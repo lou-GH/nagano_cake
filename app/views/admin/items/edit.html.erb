@@ -1,7 +1,7 @@
 <script src="https://kit.fontawesome.com/6fd84a1e7d.js" crossorigin="anonymous"></script>
 <h1>商品編集</h1>
 
-<%= form_with model: @item do |f| %>
+<%= form_with model: @item, url:admin_item_path(@item) do |f| %>
 
 <p>商品画像</p>
 <%= f.file_field :item_image, placeholder: "商品画像", accept: "image/*" %>
@@ -13,9 +13,20 @@
 <p>商品説明</p>
 <%= f.text_area :introduction, autofocus: true, id:"inputIntroduction" %>
 
-<p>商品名</p>
+<p>ジャンル</p>
+<label for="inputGenre"></label>
+<%= f.collection_select :genre_id, Genre.all, :id, :name,{prompt: @item.genre_id} %>
+
+<p>税抜き価格</p>
 <label for="inputPrice"></label>
 <%= f.text_field :price, autofocus: true, id:"inputprice", placeholder:"1000" %>円
+
+<p>販売ステータス</p>
+<label for="inputIsActive"></label>
+<%= f.radio_button :is_active, :true, autofocus: true, id:"inputIsActive" %>
+販売中
+<%= f.radio_button :is_deleted, :false, autofocus: true, id:"inputIsActive" %>
+販売停止中
 
 <div class="text-center">
   <button type="submit" class="btn btn-success">変更を保存</button>

@@ -15,6 +15,7 @@
       <div>商品説明</div>
       <div>ジャンル</div>
       <div>税込価格<br>(税抜価格)</div>
+      <div>販売ステータス</div>
 
     </div>
 
@@ -23,7 +24,14 @@
       <%= @item.name %><br>
       <%= @item.introduction %><br>
       <%= @item.genre.name %><br>
-      <%= @item.with_tax_price %> (<%= @item.price %>)円
+      <%= @item.with_tax_price %> (<%= @item.price %>)円<br>
+      <br>
+      <% if @item.is_active == true %>
+        <%= "販売中" %>
+      <% else %>
+        <%=  "販売停止中" %>
+      <% end %>
+      <br>
 
     </div>
   </div>

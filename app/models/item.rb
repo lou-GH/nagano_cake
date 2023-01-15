@@ -5,6 +5,8 @@ class Item < ApplicationRecord
 
   has_one_attached :item_image
 
+  validates :is_active, inclusion: {in: [true, false]}
+
   def get_item_image(width, height)
     unless item_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')

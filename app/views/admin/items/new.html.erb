@@ -26,6 +26,14 @@
       <%= f.text_field :price, placeholder: "1000" %>円
     </div>
 
+    <div>
+      <%= f.label:販売ステータス, class:"col-xs-3" %>
+      <%= f.radio_button :is_active, :true, autofocus: true, id:"inputIsActive" %>
+      販売中
+      <%= f.radio_button :is_deleted, :false, autofocus: true, id:"inputIsActive" %>
+      販売停止中
+    </div>
+
       <br>
       <br>
 

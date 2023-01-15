@@ -16,10 +16,10 @@ class Admin::OrdersController < ApplicationController
     @order.update(order_params)
     @order_details = @order.order_details
 
-    if @order.status == "入金確認"
+    if @order.order_status == "confirm_payment"
       @order_details.each do |order_detail|
-        order_detail.make_status = "製作待ち"
-        order_detail.save
+        order_detail.manufacture_status = "waiting_manufacture"
+        order_detail.update(order_detail_params)
       end
     end
     redirect_to admin_order_path
@@ -28,7 +28,11 @@ class Admin::OrdersController < ApplicationController
   private
 
     def order_params
-      params.require(:order).permit(:status)
+      params.require(:order).permit(:order_status)
+    end
+
+    def order_detail_params
+      params.require(:order_detail).permit(:manufacture_status)
     end
 
 end
