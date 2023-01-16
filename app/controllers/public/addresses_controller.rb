@@ -1,7 +1,9 @@
 class Public::AddressesController < ApplicationController
   def index
     @address = Address.new
-    @addresses = Address.all
+    # @address.customer_id = current_customer.id
+    # @addresses = Address.all
+    @addresses = current_customer.addresses
   end
 
   def edit
@@ -13,10 +15,10 @@ class Public::AddressesController < ApplicationController
     @address.customer_id = current_customer.id
     if @address.save
       flash[:notice] = "Address was successfully created."
-      @addresses = Address.all
+      @addresses = current_customer.addresses
       redirect_to addresses_path
     else
-      @addresses = Address.all
+      @addresses = current_customer.addresses
       render :index
     end
   end
@@ -25,10 +27,10 @@ class Public::AddressesController < ApplicationController
     @address = Address.find(params[:id])
     if @address.update(address_params)
       flash[:notice] = "Address  was successfully updated."
-      @addresses = Address.all
+      @addresses = current_customer.addresses
       redirect_to addresses_path
     else
-      @addresses = Address.all
+      @addresses = current_customer.addresses
       render :index
     end
   end
@@ -37,10 +39,10 @@ class Public::AddressesController < ApplicationController
     @address = Address.find(params[:id])
     if @address.destroy
       flash[:notice] = "Address  was successfully destroyed."
-      @addresses = Address.all
+      @addresses = current_customer.addresses
       redirect_to addresses_path
     else
-      @addresses = Address.all
+      @addresses = current_customer.addresses
       render :index
     end
   end

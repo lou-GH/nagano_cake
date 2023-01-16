@@ -1,3 +1,4 @@
+<div>
 <h2>配送先登録/一覧</h2>
 
 <%= form_with model: @addresses, url: addresses_path do |f| %>
@@ -33,6 +34,7 @@
         <th></th>
       </tr>
     </thead>
+
     <% @addresses.each do |address| %>
     <tbody>
       <tr>
@@ -50,6 +52,7 @@
         </td>
       </tr>
     </tbody>
-
   <% end %>
+  </table>
+</div>
 </div>
