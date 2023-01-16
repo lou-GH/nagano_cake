@@ -13,7 +13,7 @@ ja:
         finish_prepare: '発送済み'
 
     order_detail:
-      manufacture_status:
+      making_status:
         impossible_manufacture: '着手不可'
         waiting_manufacture: '製作待ち'
         manufacturing: '製作中'

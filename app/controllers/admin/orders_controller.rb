@@ -17,10 +17,13 @@ class Admin::OrdersController < ApplicationController
     @order_details = @order.order_details
 
     if @order.order_status == "confirm_payment"
-      @order_details.each do |order_detail|
-        order_detail.manufacture_status = "waiting_manufacture"
-        order_detail.update(order_detail_params)
-      end
+      @order_details.update_all(making_status: "waiting_manufacture")
+
+      # @order_details.each do |order_detail|
+        # order_detail.making_status = 1
+        # order_detail.update(making_status: "waiting_manufacture")
+        # order_detail.update
+      # end
     end
     redirect_to admin_order_path
   end
@@ -29,10 +32,6 @@ class Admin::OrdersController < ApplicationController
 
     def order_params
       params.require(:order).permit(:order_status)
-    end
-
-    def order_detail_params
-      params.require(:order_detail).permit(:manufacture_status)
     end
 
 end
