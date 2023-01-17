@@ -6,16 +6,16 @@ class Admin::OrderDetailsController < ApplicationController
     @order_detail.update(order_detail_params)
 
     if @order_details.where(making_status: "manufacturing").count >= 1
-      @order.order_status.update(order_status: "making")
+      @order.update(order_status: "making")
       # @order.order_status = "making"
       # @order.update
     end
 
     if @order.order_details.count == @order_details.where(making_status: "finish").count
-      @order.order_status.update(making_status: "preparing_ship")
+      @order.update(order_status: "preparing_ship")
     end
 
-    redirect_to admin_order_path
+    redirect_to admin_order_path(@order)
   end
 
    private
